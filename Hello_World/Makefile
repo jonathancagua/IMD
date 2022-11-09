@@ -4,7 +4,7 @@ ifdef ARCH
 	#You can update your Beaglebone path here.
 	KDIR = /home/jc/BBB/tmp/lib/modules/5.10.65/build
 else
-	KDIR = /lib/modules/5.15.76-v7+/build
+	KDIR = /lib/modules/$(shell uname -r)/build
 endif
  
 all:

@@ -4,13 +4,13 @@
  
 static int __init hello_world_init(void)
 {
-    pr_info("Kernel Module Inserted Successfully...\n");
+    pr_info("Jonathan DEBUG: Kernel Module Inserted Successfully...\n");
     return 0;
 }
 
 static void __exit hello_world_exit(void)
 {
-    pr_info("Kernel Module Removed Successfully...\n");
+    pr_info("Jonathan DEBUG: Kernel Module Removed Successfully...\n");
 }
  
 module_init(hello_world_init);
