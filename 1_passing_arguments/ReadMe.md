@@ -1,0 +1,1 @@
+Esto es sólo un controlador de dispositivo de linux básico. Esto explicará cómo pasar los argumentos al controlador de dispositivo de linux.
