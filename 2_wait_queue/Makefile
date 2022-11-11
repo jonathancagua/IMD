@@ -1,4 +1,4 @@
-obj-m += hello_world.o
+obj-m += wait_queue.o
  
 KDIR = /lib/modules/$(shell uname -r)/build
 
