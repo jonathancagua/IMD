@@ -134,7 +134,7 @@ static int __init etx_driver_init(void)
     
     if( etx_i2c_adapter != NULL )
     {
-        etx_i2c_client_cap_sense = i2c_new_device(etx_i2c_adapter, &cap_i2c_board_info);
+        etx_i2c_client_cap_sense = i2c_new_client_device(etx_i2c_adapter, &cap_i2c_board_info);
         
         if( etx_i2c_client_cap_sense != NULL )
         {
