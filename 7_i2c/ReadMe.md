@@ -4,3 +4,7 @@ Esto es sólo un controlador de dispositivo de linux básico. Esto explicará c�
 Visualizar en la raspberry:
 
     cat /proc/devices | grep "jcagua_dev"
+
+Leer el valor de un registro:
+
+    sudo cat /dev/etx_device
