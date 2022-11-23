@@ -32,6 +32,7 @@ static ssize_t etx_write(struct file *filp,
 /******************************************************/
 static void CAP1188_write(unsigned char reg, unsigned char data);
 static int I2C_read(unsigned char *out_buf, unsigned int len);
+static int I2C_write(unsigned char *buf, unsigned int len);
 //File operation structure 
 static struct file_operations fops =
 {
@@ -70,10 +71,11 @@ static ssize_t etx_read(struct file *filp,
     */ 
     uint8_t *data = "Touch is: \n";
     uint8_t sensor_data = 0x00;
-
+    uint8_t lectura_reg= 0x03;
     size_t datalen = strlen(data);
     CAP1188_write(0x00,0x01); //sensitivity control
     CAP1188_write(0x00,0x00);
+    ret = I2C_write(&lectura_reg, 1);
     I2C_read(&sensor_data, 1);
     if (count > datalen) {
         count = datalen;
