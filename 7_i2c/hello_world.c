@@ -70,8 +70,6 @@ static ssize_t etx_read(struct file *filp,
     uint8_t *data = "Hello from the kernel world!\n";
     size_t datalen = strlen(data);
 
-    printk("Reading device: %d\n", MINOR(file->f_path.dentry->d_inode->i_rdev));
-
     if (count > datalen) {
         count = datalen;
     }
@@ -79,7 +77,7 @@ static ssize_t etx_read(struct file *filp,
     if (copy_to_user(buf, data, count)) {
         return -EFAULT;
     }
-
+    pr_info("Driver Read Function Called...!!!\n");
     return count;
 }
 
