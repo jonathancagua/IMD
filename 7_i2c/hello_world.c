@@ -30,7 +30,8 @@ static ssize_t etx_read(struct file *filp,
 static ssize_t etx_write(struct file *filp, 
                 const char *buf, size_t len, loff_t * off);
 /******************************************************/
-
+static void CAP1188_write(unsigned char reg, unsigned char data);
+static int I2C_read(unsigned char *out_buf, unsigned int len);
 //File operation structure 
 static struct file_operations fops =
 {
@@ -68,8 +69,12 @@ static ssize_t etx_read(struct file *filp,
     ** This function will be called when we read the Device file
     */ 
     uint8_t *data = "Touch is: \n";
-    size_t datalen = strlen(data);
+    uint8_t sensor_data = 0x00;
 
+    size_t datalen = strlen(data);
+    CAP1188_write(0x00,0x01); //sensitivity control
+    CAP1188_write(0x00,0x00);
+    I2C_read(&sensor_data, 1);
     if (count > datalen) {
         count = datalen;
     }
@@ -78,6 +83,7 @@ static ssize_t etx_read(struct file *filp,
         return -EFAULT;
     }
     pr_info("Driver Read Function Called...!!!\n");
+    pr_info("Driver Read Data %d ...!!!\n",sensor_data);
     return count;
 }
 
@@ -126,24 +132,24 @@ static void CAP1188_write(unsigned char reg, unsigned char data)
 
 static int CAP1188_display_init(void)
 {
-    msleep(100);               // delay
+    msleep(100);/*delay*/
  
     /*
     ** Commands to initialize the CAP1188
     */
-    CAP1188_write(0x00,0x80); //sensitivity control
+    CAP1188_write(0x00,0x80); /*sensitivity control*/
     CAP1188_write(0x26,0x1f);
-    CAP1188_write(0x71,0xff);//Led output register
-    CAP1188_write(0x72,0x1f);//Led linking register
-    CAP1188_write(0x73,0xff);//Led polarity register
-    CAP1188_write(0x81,0x00);//Set led breath or pulse.
+    CAP1188_write(0x71,0xff);/*Led output register*/
+    CAP1188_write(0x72,0x1f);/*Led linking register*/
+    CAP1188_write(0x73,0xff);/*Led polarity register*/
+    CAP1188_write(0x81,0x00);/*Set led breath or pulse.*/
     CAP1188_write(0x82,0x00);
-    CAP1188_write(0x86,0x40);// Breathing speed
-    CAP1188_write(0x93,0xf0);// Max-min duty cycle set
-    CAP1188_write(0x92,0xf0);// Max-min breathing duty cycle.
-    CAP1188_write(0x94,0x00);//Ramp rise and fall rate at touch
-    CAP1188_write(0x95,0x60);//Led off time between breathing
-    CAP1188_write(0x81,0x00);//Disable all breathing leds.
+    CAP1188_write(0x86,0x40);/* Breathing speed*/
+    CAP1188_write(0x93,0xf0);/* Max-min duty cycle set*/
+    CAP1188_write(0x92,0xf0);/* Max-min breathing duty cycle.*/
+    CAP1188_write(0x94,0x00);/*Ramp rise and fall rate at touch*/
+    CAP1188_write(0x95,0x60);/*Led off time between breathing*/
+    CAP1188_write(0x81,0x00);/*Disable all breathing leds.*/
     
     return 0;
 }
