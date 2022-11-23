@@ -62,18 +62,25 @@ static int etx_release(struct inode *inode, struct file *file)
 }
 
 static ssize_t etx_read(struct file *filp, 
-                char __user *buf, size_t len, loff_t *off)
+                char __user *buf, size_t count, loff_t *off)
 {
     /*
     ** This function will be called when we read the Device file
     */ 
-    uint32_t value_device=29;
-    len = 4;
-    if( copy_to_user(buf, (char*)&value_device, len) > 0) {
-        pr_err("ERROR: Not all the bytes have been copied to user\n");
+    uint8_t *data = "Hello from the kernel world!\n";
+    size_t datalen = strlen(data);
+
+    printk("Reading device: %d\n", MINOR(file->f_path.dentry->d_inode->i_rdev));
+
+    if (count > datalen) {
+        count = datalen;
     }
-    pr_info("Driver Read Function Called...!!!\n");
-    return 0;
+
+    if (copy_to_user(buf, data, count)) {
+        return -EFAULT;
+    }
+
+    return count;
 }
 
 static ssize_t etx_write(struct file *filp, 
