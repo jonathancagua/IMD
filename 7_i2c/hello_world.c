@@ -75,7 +75,7 @@ static ssize_t etx_read(struct file *filp,
     size_t datalen = strlen(data);
     CAP1188_write(0x00,0x01); //sensitivity control
     CAP1188_write(0x00,0x00);
-    ret = I2C_write(&lectura_reg, 1);
+    I2C_write(&lectura_reg, 1);
     I2C_read(&sensor_data, 1);
     if (count > datalen) {
         count = datalen;
