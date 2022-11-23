@@ -69,11 +69,10 @@ static ssize_t etx_read(struct file *filp,
     /*
     ** This function will be called when we read the Device file
     */ 
-    char str[16];
-    //uint8_t *data = "Touch is: \n";
+    //char str[16];
     uint8_t sensor_data = 0x00;
     uint8_t lectura_reg= 0x03;
-    size_t datalen = 16;
+    size_t datalen = 1;
     CAP1188_write(0x00,0x01); //sensitivity control
     CAP1188_write(0x00,0x00);
     I2C_write(&lectura_reg, 1);
@@ -81,8 +80,8 @@ static ssize_t etx_read(struct file *filp,
     if (count > datalen) {
         count = datalen;
     }
-    sprintf(str, "Touch is: %d \n", sensor_data);
-    if (copy_to_user(buf, str, count)) {
+    //sprintf(str, "Touch is: %d \n", sensor_data);
+    if (copy_to_user(buf, (char*)&sensor_data, count)) {
         return -EFAULT;
     }
     pr_info("Driver Read Function Called...!!!\n");
