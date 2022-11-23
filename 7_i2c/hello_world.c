@@ -67,7 +67,7 @@ static ssize_t etx_read(struct file *filp,
     /*
     ** This function will be called when we read the Device file
     */ 
-    uint8_t *data = "Hello from the kernel world!\n";
+    uint8_t *data = "Touch is: \n";
     size_t datalen = strlen(data);
 
     if (count > datalen) {
