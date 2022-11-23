@@ -69,7 +69,7 @@ static ssize_t etx_read(struct file *filp,
     */ 
     uint32_t value_device=29;
     len = 4;
-    if( copy_to_user(buf, (char*)&pres32, len) > 0) {
+    if( copy_to_user(buf, (char*)&value_device, len) > 0) {
         pr_err("ERROR: Not all the bytes have been copied to user\n");
     }
     pr_info("Driver Read Function Called...!!!\n");
