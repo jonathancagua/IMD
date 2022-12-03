@@ -1,6 +1,6 @@
 #!/bin/sh
 touch_sensor=/dev/etx_device
-
+echo "INICICIANDO DRIVER"
 while :
 do
     button=`cat $touch_sensor`
