@@ -1,6 +1,6 @@
-Esto es sólo un controlador de dispositivo de linux básico. Esto explicará cómo pasar los argumentos al controlador de dispositivo de linux.
+Esto es sólo un controlador de dispositivo de linux básico. Esto explicará cómo usar un dispositivo i2c.
 
-## `Dispositivo I2C`
+## Dispositivo I2C
 
 El CAP1188 es un controlador táctil capacitivo que ofrece una amplia variedad de funciones de botón y proximidad, y facilita a los diseñadores la incorporación de interfaces táctiles estéticamente agradables, de bajo coste y robustas. <br>
 ![imagen](../img/board.jpg)
@@ -18,7 +18,7 @@ El CAP1188 también contiene 8 controladores de LED que ofrecen encendido/apagad
 - Funcionamiento de bajo consumo
 - I²C™ y SMBus
 
-## `Configuracion de driver`
+## Configuracion de driver
 
 La estructura `file_operations` está definida en `linux/fs.h` y contiene punteros a funciones definidas por el controlador que realizan varias operaciones en el dispositivo. Cada campo de la estructura corresponde a la dirección de alguna función definida por el controlador para manejar una operación solicitada.
 
@@ -90,7 +90,7 @@ static void CAP1188_write(unsigned char reg, unsigned char data)
 }
 ```
 
-## `Lectura del modulo`
+## Lectura del modulo
 Se crea una funcion para leer por I2C.
 ```C
 static int I2C_read(unsigned char *out_buf, unsigned int len)
@@ -138,7 +138,7 @@ static ssize_t etx_read(struct file *filp,
 }
 ```
 
-## `Pines de la Raspberry`
+## Pines de la Raspberry
 Los pines usados son:
 
 - GPIO 2 – SDA
@@ -146,7 +146,7 @@ Los pines usados son:
 
 ![imagen](../img/pines-i2c-raspberry-pi-2.png)
 
-## `Enable I2C en raspbian con raspberry 3.`
+## Enable I2C en raspbian con raspberry 3.
 I2C es un estándar muy utilizado diseñado para permitir que un chip hable con otro. Por lo tanto, ya que la Raspberry Pi puede hablar I2C podemos conectarla a una variedad de chips y módulos capaces de I2C.
 El bus I2C permite conectar múltiples dispositivos a tu Raspberry Pi, cada uno con una dirección única, que a menudo se puede establecer cambiando la configuración de los puentes en el módulo. Es muy útil ser capaz de ver qué dispositivos están conectados a su Pi como una forma de asegurarse de que todo está funcionando.
 
