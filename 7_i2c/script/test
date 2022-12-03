@@ -1,0 +1,12 @@
+#!/bin/sh
+touch_sensor=/dev/etx_device
+
+while :
+do
+    button=`cat $touch_sensor`
+    if [ $button -ne "0" ]
+    then
+        echo "PRESIONADO EL BOTON"
+        sleep 2
+    fi
+done
