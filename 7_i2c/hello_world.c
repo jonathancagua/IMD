@@ -10,6 +10,7 @@
 #include <linux/cdev.h>
 #include <linux/device.h>
 
+#define pr_fmt(fmt) "%s:%s(): " fmt, KBUILD_MODNAME, __func__
  
 #define I2C_BUS_AVAILABLE   (          1 )              // I2C Bus available in our Raspberry Pi
 #define SLAVE_DEVICE_NAME   ( "ETX_SENS" )              // Device and Driver Name
