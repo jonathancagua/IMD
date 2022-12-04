@@ -4,7 +4,6 @@ echo "INICICIANDO DRIVER"
 while true
 do
     button=`cat $touch_sensor`
-    echo "Leido $button"
     if [ $button -ne "0" ]
     then
         echo "PRESIONADO EL BOTON"
