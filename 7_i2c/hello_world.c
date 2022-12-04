@@ -74,21 +74,25 @@ static ssize_t etx_read(struct file *filp,
     uint8_t sensor_data = 0x00;
     uint8_t lectura_reg= 0x03;
     size_t datalen = 0;
-    CAP1188_write(0x00,0x01); //sensitivity control
-    CAP1188_write(0x00,0x00);
-    I2C_write(&lectura_reg, 1);
-    I2C_read(&sensor_data, 1);
-    sprintf(str, "%d\n", sensor_data);
-    datalen = strlen(str);
-    if (count > datalen) {
-        count = datalen;
+    if(*off == 0){
+        CAP1188_write(0x00,0x01); //sensitivity control
+        CAP1188_write(0x00,0x00);
+        I2C_write(&lectura_reg, 1);
+        I2C_read(&sensor_data, 1);
+        sprintf(str, "%d\n", sensor_data);
+        datalen = strlen(str);
+        if (count > datalen) {
+            count = datalen;
+        }
+        if (copy_to_user(buf, str, count)) {
+            return -EFAULT;
+        }
+        pr_info("Driver Read Function Called...!!!\n");
+        pr_info("Driver Read Data %d ...!!!\n",sensor_data);
+        *off += count;
+        return count;
     }
-    if (copy_to_user(buf, str, count)) {
-        return -EFAULT;
-    }
-    pr_info("Driver Read Function Called...!!!\n");
-    pr_info("Driver Read Data %d ...!!!\n",sensor_data);
-    return count;
+    return 0;
 }
 
 static ssize_t etx_write(struct file *filp, 
