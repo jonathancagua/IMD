@@ -229,7 +229,7 @@ static int __init etx_driver_init(void)
 {
     int ret = -1;
     /*Allocating Major number*/
-    if((alloc_chrdev_region(&dev, 0, 1, "etx_Dev")) <0){
+    if((alloc_chrdev_region(&dev, 0, 1, "cap1188_dev")) <0){
         pr_err("Cannot allocate major number\n");
         return -1;
     }
@@ -245,13 +245,13 @@ static int __init etx_driver_init(void)
     }
 
     /*Creating struct class*/
-    if((dev_class = class_create(THIS_MODULE,"etx_class")) == NULL){
+    if((dev_class = class_create(THIS_MODULE,"class_1188")) == NULL){
         pr_err("Cannot create the struct class\n");
         return -1;
     }
 
     /*Creating device*/
-    if((device_create(dev_class,NULL,dev,NULL,"etx_device")) == NULL){
+    if((device_create(dev_class,NULL,dev,NULL,"cap1188")) == NULL){
         pr_err( "Cannot create the Device \n");
         return -1;
     }

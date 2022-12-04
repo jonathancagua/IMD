@@ -194,11 +194,11 @@ Si tienes conectado el sensor debes ejucar el siguiente comando:
 
 Visualizar en la raspberry:
 
-    cat /proc/devices | grep "etx_Dev"
+    cat /proc/devices | grep "cap1188_dev"
 
 Leer el valor de un registro:
 
-    sudo cat /dev/etx_device
+    sudo cat /dev/cap1188
 
 Para visualizar los datos del archivo, secciones de codigo:
 
@@ -209,7 +209,7 @@ Se agrega un script para pruebas que verifica si el data es diferente de cero y 
 
 ``` bash
 #!/bin/sh
-touch_sensor=/dev/etx_device
+touch_sensor=/dev/cap1188
 echo "INICIANDO DRIVER"
 while true
 do

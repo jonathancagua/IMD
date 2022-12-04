@@ -1,5 +1,5 @@
 #!/bin/sh
-touch_sensor=/dev/etx_device
+touch_sensor=/dev/cap1188
 echo "INICIANDO DRIVER"
 while true
 do
