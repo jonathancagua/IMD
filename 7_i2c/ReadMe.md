@@ -203,3 +203,27 @@ Para visualizar los datos del archivo, secciones de codigo:
 
     objdump -h hello_world.ko
 
+## Script 
+Se agrega un script para pruebas que verifica si el data es diferente de cero y muestra que el dato es leido.
+
+``` bash
+#!/bin/sh
+touch_sensor=/dev/etx_device
+echo "INICIANDO DRIVER"
+while true
+do
+    button=`cat $touch_sensor`
+    if [ $button -ne "0" ]
+    then
+        echo "PRESIONADO EL BOTON"
+        sleep 2
+    fi
+done
+```
+Se puede visualizar como se presenta al presionar un touch.
+
+```
+j@raspberrypi:~/Documents/IMD/7_i2c $ sudo ./script/test 
+INICIANDO DRIVER
+PRESIONADO EL BOTON
+```
