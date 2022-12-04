@@ -7,6 +7,11 @@ Se debe usar el sigueinte comando por ssh a la raspberry:
 
 Luego de ese comando se debe actualziar el kernel: 
 
+    sudo apt-get update
+    sudo apt-get upgrade
+
+o
+
     sudo rpi-update
 
 Para ver el kernel instalado se usa el sigueinte comando:
