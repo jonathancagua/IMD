@@ -4,7 +4,7 @@ Pruebas del kernel en Raspberry o Linux
 # Propósito
 Practicar la compilación y ejecución de drivers (o módulos) en el kernel de Linux.
 
-El ejemplo de driver en la carpeta `./Hello_world`, cuando se monta/desmonta, hace un print en los
+El ejemplo de driver en la carpeta `./0_Hello_world`, cuando se monta/desmonta, hace un print en los
 logs del kernel.
 
 # Instalacion del kernel en la raspberry:
