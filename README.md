@@ -59,18 +59,18 @@ Para ver el proyecto ejecutando se usa el comando dmesg:
 ## Tip
 Mostrar las primeras/últimas n líneas de un archivo con `head -n` o `tail -n` respectivamente
 
-# Revisar logs del kernel
-
-El comando `dmesg` muestra los logs del kernel, estos pueden ser extensos así que mostraremos
-las últimas 5 lineas con el comando `tail`:
-
-    dmesg | tail -5
-    
-
 # Desmontar el driver
 Para desmontar se usa el siguiente comando `rmmod`:
 
     sudo rmmod hello_world.ko
+
+Revisamos el log en dmesg:
+
+    j@raspberrypi:~/Documents/IMD/Hello_World $ dmesg | tail -3
+    [  820.235985] hwmon hwmon1: Voltage normalised
+    [ 1036.484686] Jonathan DEBUG: Kernel Module Inserted Successfully...
+    [ 7542.193394] Jonathan DEBUG: Kernel Module Removed Successfully...
+
 
 ## Mostrar info del driver
 Para mostrar informacion del modulo
