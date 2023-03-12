@@ -18,7 +18,7 @@ static LIST_HEAD(carlist);
 
 static int __init hello_world_init(void) {
   pr_info("Jonathan DEBUG: Kernel Module Inserted Successfully...\n");
-  
+
   struct car *redcar = kmalloc(sizeof(struct car), GFP_KERNEL);
   struct car *bluecar = kmalloc(sizeof(struct car), GFP_KERNEL);
 
@@ -57,8 +57,11 @@ static int __init hello_world_init(void) {
   pr_info("      carlist.next: %p\n", carlist.next);
   pr_info("bluecar->list.next: %p\n", bluecar->list.next);
   pr_info(" redcar->list.next: %p\n", redcar->list.next);
-  
+
   pr_info("carlist -> bluecar -> redcar\n");
+  /* Free allocated memory, nothing is freed automatically */
+  kfree(redcar);
+  kfree(bluecar);
   return 0;
 }
 
