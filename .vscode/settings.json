@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+        "**/*.ko.cmd": true,
+        "**/*.mod.o.cmd": true,
+        "**/*.o.cmd": true,
+        "**/*.ko": true,
+        "**/*.mod.c": true,
+        "**/*.mod.o": true,
+        "**/*.o": true,
+        "**/*.symvers": true,
+        "**/*.order": true,
+        "**/*.cache.mk": true,
+        "**/.tmp_versions": true,
+    }
+}
