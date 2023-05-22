@@ -11,5 +11,8 @@
         "**/*.order": true,
         "**/*.cache.mk": true,
         "**/.tmp_versions": true,
-    }
+    },
+    "clang-format.executable": "${env.PROGRAMFILES}/LLVM/bin/clang-format.exe",
+    "clang-format.language.c.enable": true,
+    "clang-format.assumeFilename": ".clang-format" // file at the root folder
 }
