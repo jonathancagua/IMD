@@ -1,21 +1,11 @@
 # IMD
 Pruebas del kernel en Raspberry o Linux
 
-# Prerequisitos
-
-
 # Propósito
-Practicar la compilación y ejecución de drivers (o módulos) en el kernel de Linux.
+Practicar la compilación y ejecución de módulos para kernel de Linux.
 
-El ejemplo de driver en la carpeta `./0_Hello_world`, cuando se monta/desmonta, hace un print en los
-logs del kernel.
-
-# Instalacion del kernel en la raspberry:
-Se debe usar el sigueinte comando por ssh a la raspberry:
-
-    sudo apt install raspberrypi-kernel-headers
-
-Luego de ese comando se debe actualziar el kernel: 
+# Requisitos
+En una terminal de la Raspberry:
 
     sudo apt-get update
     sudo apt-get upgrade
@@ -24,17 +14,32 @@ o
 
     sudo rpi-update
 
-Para ver el kernel instalado se usa el sigueinte comando:
+**Instalar los headers:**
 
-    j@raspberrypi:~/Documents/IMD/0_Hello_world $ uname -a
+    sudo apt install raspberrypi-kernel-headers
+
+Para ver el kernel instalado:
+
+    uname -a
+
+La salida en la terminal sería:
+
     Linux raspberrypi 5.15.76-v7+ #1597 SMP Fri Nov 4 12:13:17 GMT 2022 armv7l GNU/Linux
 
-# Compilar el driver
-Para compilar el proyecto se ingresa a la carpeta `0_Hello_world` y se ejecuta el siguiente comando:
+# Paso a paso
+A continuación se muestra el paso a paso para el ejemplo en `./0_Hello_world`.
+El resto de ejemplos se ejecuta de manera similar
 
-    j@raspberrypi:~/Documents/IMD/0_Hello_world $ sudo make
+# Compilar el módulo
+Entrar a la carpeta `0_Hello_world`
 
-Y mostrará lo siguiente en la terminal:
+    cd 0_Hello_world
+
+Compilar con el comando:
+
+    sudo make
+
+La salida en la terminal:
 
     make -C /lib/modules/5.15.76-v7+/build  M=/home/j/Documents/IMD/Hello_World modules
     make[1]: Entering directory '/usr/src/linux-headers-5.15.76-v7+'
@@ -47,38 +52,50 @@ Para montar el módulo usaremos el comando `insmod` con privilegio:
 
 Para verificar que se montó al kernel, se usa lsmod.
 
-    j@raspberrypi:~/Documents/IMD/0_Hello_world $ lsmod | head -3
+    lsmod | head -3
+
+La salida en la terminal:
+
     Module                  Size  Used by
     hello_world            16384  0
     rfcomm                 49152  4
 
 Para ver el proyecto ejecutando se usa el comando dmesg:
 
-    j@raspberrypi:~/Documents/IMD/0_Hello_world $ dmesg | tail -3
+    dmesg | tail -3
+
+Su salida sería:
+
     [    0.000000] Booting Linux on physical CPU 0x0
     [  820.235985] hwmon hwmon1: Voltage normalised
     [ 1036.484686] Jonathan DEBUG: Kernel Module Inserted Successfully...
-    
+
 ## Tip
-Mostrar las primeras/últimas n líneas de un archivo con `head -n` o `tail -n` respectivamente
+`head -n` o `tail -n` muestran respectivamente las primeras/últimas n lineas.
 
 # Desmontar el driver
 Para desmontar se usa el siguiente comando `rmmod`:
 
     sudo rmmod hello_world.ko
 
-Revisamos el log en dmesg:
+Verificar el log:
 
-    j@raspberrypi:~/Documents/IMD/0_Hello_world $ dmesg | tail -3
+    dmesg | tail -3
+
+La salida en la terminal:
+
     [  820.235985] hwmon hwmon1: Voltage normalised
     [ 1036.484686] Jonathan DEBUG: Kernel Module Inserted Successfully...
     [ 7542.193394] Jonathan DEBUG: Kernel Module Removed Successfully...
 
 
 ## Mostrar info del driver
-Para mostrar informacion del modulo
+Para mostrar informacion del módulo.
 
-    j@raspberrypi:~/Documents/IMD/0_Hello_world $ modinfo hello_world.ko
+    modinfo hello_world.ko
+
+La salida en la terminal:
+
     filename:       /home/j/Documents/IMD/0_Hello_world/hello_world.ko
     version:        1:1.0
     description:    hello world driver
